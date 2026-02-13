@@ -1,0 +1,10 @@
+{
+  "name": "Legal Summaries",
+  "description": "Extension to summarize license agreements and terms of service.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": ["activeTab", "scripting"]
+}
