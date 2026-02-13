@@ -117,6 +117,7 @@ function displayResults(data) {
 document.getElementById('ask-btn').addEventListener('click', async () => {
     const question = document.getElementById('user-question').value;
     const output = document.getElementById('answer-output');
+    const askBtn = document.getElementById('ask-btn');
     
     // 1. Critical Check: Ensure we have the text and a question
     if (!question || !capturedLegalText) {
@@ -124,7 +125,17 @@ document.getElementById('ask-btn').addEventListener('click', async () => {
         return;
     }
 
-    output.textContent = "Searching the legal fine print...";
+    output.classList.remove('hidden');
+    askBtn.disabled = true; // Prevent double-clicking
+    askBtn.style.opacity = "0.5";
+    
+    // Add the spinner and text
+    output.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="spinner" style="width: 12px; height: 12px; border-width: 2px; margin: 0;"></div>
+            <span>Analyzing the fine print...</span>
+        </div>
+    `;
 
     try {
         const API_KEY = CONFIG.GEMINI_API_KEY; 
@@ -150,13 +161,25 @@ document.getElementById('ask-btn').addEventListener('click', async () => {
             })
         });
 
-        const data = await response.json();
-        const aiAnswer = data.candidates[0].content.parts[0].text;
-        
-        output.innerHTML = `<strong>AI Answer:</strong> ${aiAnswer}`;
+        const result = await response.json();
+
+        try {
+            // Navigating the Gemini API response structure
+            const aiText = result.candidates[0].content.parts[0].text;
+            
+            const output = document.getElementById('answer-output');
+            output.classList.remove('hidden');
+            output.innerHTML = `<strong>AI Answer:</strong> ${aiText}`;
+        } catch (e) {
+            console.error("Parsing error:", e);
+            document.getElementById('answer-output').innerText = "The AI gave an unexpected response format.";
+        }
 
     } catch (error) {
         output.textContent = "Error finding answer. Try again.";
         console.error("Chat Error:", error);
+    } finally {
+        askBtn.disabled = false;
+        askBtn.style.opacity = "1";
     }
 });

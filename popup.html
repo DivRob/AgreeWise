@@ -67,6 +67,46 @@
 
         button#analyze-btn:hover { background: #1d4ed8; }
 
+        #user-question {
+            flex-grow: 1;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--slate-200);
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #user-question:focus {
+            border-color: var(--blue);
+        }
+
+        #ask-btn {
+            background: var(--blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #ask-btn:hover {
+            background: #0f172a;
+        }
+
+        .answer-box {
+            margin-top: 12px;
+            padding: 12px;
+            background: var(--slate-50);
+            border-radius: 8px;
+            font-size: 12px;
+            line-height: 1.5;
+            border: 1px dashed var(--slate-200);
+            color: var(--slate-800);
+        }
+
         /* Status Flags */
         .flag { border-radius: 10px; padding: 12px; margin-bottom: 12px; border-left: 4px solid; }
         .flag-red { background: #fef2f2; border-color: var(--red); color: #991b1b; }
@@ -139,13 +179,16 @@
                 <ul id="green-list"></ul>
             </div>
 
-            <div class="search-section">
-                <h4>Ask a specific question:</h4>
-                <div style="display: flex; gap: 5px;">
-                    <input type="text" id="user-question" placeholder="e.g., How do I delete my account?">
-                    <button id="ask-btn">Ask</button>
+            <div class="card search-section" style="margin-top: 16px;">
+                <p class="subtitle">Quick Inquiry</p>
+                <h4 style="margin: 8px 0 12px 0; font-size: 14px;">Ask a specific question</h4>
+                
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" id="user-question" placeholder="e.g., Can I delete my data?">
+                    <button id="ask-btn" style="width: auto; padding: 0 16px;">Ask</button>
                 </div>
-                <div id="answer-output" style="margin-top: 10px; font-style: italic; color: #444;"></div>
+                
+                <div id="answer-output" class="answer-box hidden"></div>
             </div>
         </div>
     </main>
