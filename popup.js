@@ -48,7 +48,7 @@ function resetUI() {
 async function processWithAI(legalText) {
     // 🛑 REPLACE THIS WITH YOUR REAL API KEY done
     const API_KEY = CONFIG.GEMINI_API_KEY; 
-    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;    // We truncate the text to ~15k characters so the AI doesn't get overwhelmed 
+    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;    // We truncate the text to ~15k characters so the AI doesn't get overwhelmed 
     // and to stay within free tier limits.
     const truncatedText = legalText.substring(0, 15000);
 
