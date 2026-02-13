@@ -1,10 +1,14 @@
 {
-  "name": "Legal Summaries",
+  "name": "AgreeWise",
   "description": "Extension to summarize license agreements and terms of service.",
   "version": "1.0",
   "manifest_version": 3,
   "action": {
     "default_popup": "popup.html"
   },
-  "permissions": ["activeTab", "scripting"]
+  "permissions": ["activeTab", "scripting"],
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content.js"]
+  }]
 }
