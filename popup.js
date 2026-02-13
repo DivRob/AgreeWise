@@ -2,6 +2,7 @@ const setupView = document.getElementById('setup-view');
 const loader = document.getElementById('loader');
 const resultsView = document.getElementById('results-view');
 const analyzeBtn = document.getElementById('analyze-btn');
+let capturedLegalText = "";
 
 document.addEventListener('DOMContentLoaded', () => {
     // Now these functions can see the variables above
@@ -46,6 +47,7 @@ function resetUI() {
 }
 
 async function processWithAI(legalText) {
+    capturedLegalText = legalText;
     // 🛑 REPLACE THIS WITH YOUR REAL API KEY done
     const API_KEY = CONFIG.GEMINI_API_KEY; 
     const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;    // We truncate the text to ~15k characters so the AI doesn't get overwhelmed 
@@ -111,3 +113,50 @@ function displayResults(data) {
     fillList('yellow-list', 'yellow-container', data.yellow);
     fillList('green-list', 'green-container', data.green);
 }
+
+document.getElementById('ask-btn').addEventListener('click', async () => {
+    const question = document.getElementById('user-question').value;
+    const output = document.getElementById('answer-output');
+    
+    // 1. Critical Check: Ensure we have the text and a question
+    if (!question || !capturedLegalText) {
+        output.textContent = "Please scan a page first!";
+        return;
+    }
+
+    output.textContent = "Searching the legal fine print...";
+
+    try {
+        const API_KEY = CONFIG.GEMINI_API_KEY; 
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;
+
+        // 2. Use the correct global variable: capturedLegalText
+        const chatPrompt = `
+          You are a helpful legal assistant. Answer the user's question based ONLY on the provided text. 
+          If the answer isn't there, say "The agreement does not explicitly mention this."
+          Keep the answer concise (max 3 sentences).
+
+          User Question: ${question}
+          
+          Agreement Text: ${capturedLegalText.substring(0, 20000)} 
+        `;
+
+        // 3. Use FETCH to match your other function's style
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: chatPrompt }] }]
+            })
+        });
+
+        const data = await response.json();
+        const aiAnswer = data.candidates[0].content.parts[0].text;
+        
+        output.innerHTML = `<strong>AI Answer:</strong> ${aiAnswer}`;
+
+    } catch (error) {
+        output.textContent = "Error finding answer. Try again.";
+        console.error("Chat Error:", error);
+    }
+});
