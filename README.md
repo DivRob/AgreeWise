@@ -115,8 +115,7 @@ git clone https://github.com/DivRob/AgreeWise.git
 ```
 ---
 ## Demo Video
-* Download demo video here:
-![Demo Video](Screenshots/AgreeWise%20Demo%20Video.zip)
+* See demo video here: https://drive.google.com/drive/folders/1n3tIVK5SqfuZjSoAAVd0Rx-7QfUNuj7I?usp=sharing
 ---
 
 ## AI Tools Used
@@ -131,3 +130,8 @@ git clone https://github.com/DivRob/AgreeWise.git
 ## Team Contributions
 * Divya Robin: Lead Backend & API Integration. Implemented the Gemini fetch logic.
 * Gaurinandana S: Frontend Design. Developed the CSS Root styles and UI layout.
+
+---
+
+## License
+* This project is licensed under license name License - see the LICENSE for details
