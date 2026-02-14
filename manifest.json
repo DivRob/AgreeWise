@@ -4,7 +4,8 @@
   "version": "1.0",
   "manifest_version": 3,
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": "AgreeWise48.png"
   },
   "permissions": ["activeTab", "scripting"],
   "content_scripts": [{
