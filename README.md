@@ -65,10 +65,57 @@ git clone https://github.com/DivRob/AgreeWise.git
 
 ### Screenshots
 
+![Initial View](Screenshots/img1.png)
 
-### System Architecture:
-The extension follows the Manifest V3 architecture. The Popup (UI) communicates with the Content Script (Scraper) via message passing (chrome.tabs.sendMessage). Once the text is retrieved, the Popup makes a direct REST API call to the Gemini 3 Flash model using a secure API key stored in config.js.
+*Initial setup view prompting the user to analyze terms.*
+
+![Results View 1](Screenshots/img2.png) 
+![Results View 2](Screenshots/img3.png)
+
+*The results view displaying the AI-generated verdict and color-coded flags.*
+
+![Quick Inquiry View](Screenshots/img4.png)
+
+*Smart Inquiry Feature: Users can ask specific questions to get instant, AI-simplified answers from the legal text.*
+
+**System Architecture:**
+* The extension follows the Manifest V3 architecture. The Popup (UI) communicates with the Content Script (Scraper) via message passing ([`chrome.tabs.sendMessage`](https://developer.chrome.com/docs/extensions/reference/api/tabs#method-sendMessage)). Once the text is retrieved, the Popup makes a direct REST API call to the Gemini 3 Flash model using a secure API key stored in `config.js`.
 
 ---
 
 ### API Documentation
+
+* **Base URL:** [`https://generativelanguage.googleapis.com`](https://ai.google.dev/api/rest)
+* **Endpoint:** [`POST /v1beta/models/gemini-1.5-flash:generateContent`](https://ai.google.dev/api/rest/v1beta/models/generateContent)
+
+#### Request Body:
+
+```bash
+{
+  "contents": [{ "parts": [{ "text": "Prompt + Legal Text" }] }]
+}
+```
+#### Response:
+
+```bash
+{
+  "verdict": "High risk detected regarding data sharing.",
+  "red": ["Shares data with 3rd parties"],
+  "yellow": ["Automatic renewals"],
+  "green": ["Clear deletion policy"]
+}
+```
+---
+
+## AI Tools Used
+
+* **Tool Used:** Gemini / ChatGPT
+* **Purpose:** Debugging async message passing and optimizing CSS for the flag containers.
+* **Percentage of AI-generated code:** ~30%
+* **Human Contributions:** Architecture design, UI/UX design decisions, and prompt engineering.
+
+---
+
+## Team Contributions
+* Divya Robin: Lead Backend & API Integration. Implemented the Gemini fetch logic.
+* Gaurinandana S: Frontend Design. Developed the CSS Root styles and UI layout.
