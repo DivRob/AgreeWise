@@ -134,4 +134,4 @@ git clone https://github.com/DivRob/AgreeWise.git
 ---
 
 ## License
-* This project is licensed under license name License - see the LICENSE for details
+* This project is licensed under MIT License - see the LICENSE() for details
