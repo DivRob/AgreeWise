@@ -1,4 +1,4 @@
-![Tinkerhack](Screenshots/img.png)
+<img width="814" height="1099" alt="image" src="https://github.com/user-attachments/assets/9c69dc0b-2c8b-4474-8bbd-db26006f4d42" />![Tinkerhack](Screenshots/img.png)
 
 # AgreeWise 🎯
 
@@ -80,8 +80,13 @@ git clone https://github.com/DivRob/AgreeWise.git
 
 *Smart Inquiry Feature: Users can ask specific questions to get instant, AI-simplified answers from the legal text.*
 
+### Diagram
+
 **System Architecture:**
 * The extension follows the Manifest V3 architecture. The Popup (UI) communicates with the Content Script (Scraper) via message passing ([`chrome.tabs.sendMessage`](https://developer.chrome.com/docs/extensions/reference/api/tabs#method-sendMessage)). Once the text is retrieved, the Popup makes a direct REST API call to the Gemini 3 Flash model using a secure API key stored in `config.js`.
+
+**Application Workflow**
+<img src="path/to/image.png" alt="Alt text" width="500">
 
 ---
 
