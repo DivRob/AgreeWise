@@ -108,6 +108,9 @@ git clone https://github.com/DivRob/AgreeWise.git
 }
 ```
 ---
+## Demo Video
+![Results View 2](Screenshots/img3.png)
+---
 
 ## AI Tools Used
 
