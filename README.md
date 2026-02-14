@@ -1,6 +1,6 @@
 ![Tinkerhack](Screenshots/img.png)
 
-# AgreeWise 
+# AgreeWise 🎯
 
 ## Basic Details
 **Team Name:** DeCode
